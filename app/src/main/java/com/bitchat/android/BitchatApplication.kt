@@ -71,7 +71,8 @@ class BitchatApplication : Application() {
         
         val configuration = context.resources.configuration
         configuration.setLocale(locale)
-        configuration.setLayoutDirection(locale)
+        // Don't set layout direction to keep LTR layout
+        // configuration.setLayoutDirection(locale)
         
         return context.createConfigurationContext(configuration)
     }
