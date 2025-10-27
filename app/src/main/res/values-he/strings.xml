@@ -1,18 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO: Hebrew translations -->
-  <plurals name="location_notes_title">
-    <item quantity="one">#%1$s ± 1 • %2$d הערה</item>
-    <item quantity="other">#%1$s ± 1 • %2$d הערות</item>
-  </plurals>
-  <string name="location_notes_description">הוסף הערות קצרות וקבועות למיקום זה כדי שמבקרים אחרים ימצאו אותן.</string>
-  <string name="location_notes_relays_unavailable">ממסרי מיקום אינם זמינים; ההערות הושהו</string>
-  <string name="location_notes_no_relays_title">אין ממסרי מיקום בקרבת מקום</string>
-  <string name="location_notes_no_relays_desc">ההערות תלויות בממסרי מיקום. בדוק חיבור ונסה שוב.</string>
-  <string name="loading_location_notes">טוען הערות…</string>
-  <string name="location_notes_empty_title">אין עדיין הערות</string>
-  <string name="location_notes_empty_desc">היה הראשון להוסיף הערה למקום זה.</string>
-  <string name="dismiss">סגור</string>
-  <string name="location_notes_input_placeholder">הוסף הערה למקום זה</string>
-</resources>
+    <string name="app_name">bitchat</string>
+    
+    <!-- הצדקות הרשאות -->
+    <string name="permission_bluetooth_rationale">הרשאת Bluetooth נדרשת לשיחה peer-to-peer ללא אינטרנט.</string>
+    <string name="permission_location_rationale">הרשאת מיקום נדרשת לגילוי מכשירים קרובים דרך Bluetooth.</string>
+    <string name="permission_notification_rationale">הרשאת התראות נדרשת על מנת להתריע על הודעות חדשות.</string>
+    
+    <!-- מצביעי מקום / ממשק בסיסי -->
+    <string name="nickname_hint">כינוי</string>
+    <string name="message_hint">הקלד הודעה…</string>
+    <string name="channel_password_hint">סיסמה</string>
+    <string name="join_channel">הצטרף לערוץ</string>
+    <string name="leave_channel">עזוב</string>
+    <string name="send_message">שלח</string>
+    <string name="show_commands">הצג פקודות</string>
+    <string name="back">חזור</string>
+    <string name="people">אנשים</string>
+    <string name="channels">ערוצים</string>
+    <string name="online_users">משתמשים מחוברים</string>
+    <string name="no_one_connected">אין אף אחד מחובר</string>
+    <string name="emergency_clear_hint">לחץ שלוש פעמים כדי למחוק את כל הנתונים</string>
+    <string name="your_network">הרשת שלך</string>
+    
+    <!-- אופטימיזציה של הסוללה -->
+    <string name="battery_optimization_detected">זוהתה אופטימיזציה של הסוללה</string>
+    <string name="battery_optimization_disabled">אופטימיזציה של הסוללה מושבתת</string>
+    <string name="battery_optimization_not_required">אופטימיזציה של הסוללה אינה נדרשת</string>
+    <string name="battery_optimization_checking">בודק אופטימיזציה של הסוללה</string>
+    <string name="battery_optimization_why_disable">למה להשבית אופטימיזציה של הסוללה?</string>
+    <string name="battery_optimization_explanation">bitchat פועל ברקע על מנת לשמור על חיבורי רשת mesh עם מכשירים קרובים. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו, ולהוביל לעיכוב או אובדן הודעות.\n\nהשבתת אופטימיזציה של הסוללה מבטיחה מסירת הודעות peer-to-peer אמינה.</string>
+    <string name="battery_optimization_disable_button">השבת אופטימיזציה של הסוללה</string>
+    <string name="battery_optimization_note">הערה: ניתן לשנות הגדרה זו מאוחר יותר בהגדרות אנדרואיד > אפליקציות > bitchat > סוללה</string>
+    <string name="battery_optimization_not_supported_explanation">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. bitchat יפעל כרגיל.</string>
+    <string name="battery_optimization_not_supported_message">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. bitchat יפעל כרגיל.</string>
+    <string name="battery_optimization_success_message">bitchat יכול לפעול בצורה אמינה ברקע</string>
+    <string name="battery_optimization_benefits">• מבטיח מסירת הודעות אמינה\n• שומר על חיבור רשת mesh\n• מאפשר העברת הודעות ברקע\n• מונע ניתוק חיבורים</string>
+    <string name="battery_optimization_check_again">בדוק שוב</string>
+    <string name="battery_optimization_skip">דלג לעת עתה</string>
+    <string name="battery_optimization_continue">המשך</string>
+    <string name="retry">נסה שוב</string>
+    <string name="skip">דלג</string>
+    
+    <!-- התראות -->
+    <string name="notification_summary_more">ו-%1$d נוספים</string>
+    <string name="notification_messages_from_people">%1$d הודעות מ-%2$d אנשים</string>
+    <string name="notification_more_conversations">ו-%1$d שיחות נוספות</string>
+    <string name="notification_active_peers_title">👥 bitchatters קרובים!</string>
+    <string name="notification_active_peers_one">אדם אחד בסביבה</string>
+    <string name="notification_active_peers_many">%1$d אנשים בסביבה</string>
+    <string name="notification_new_messages">הודעות חדשות</string>
+    <string name="notification_new_location_messages">הודעות מיקום חדשות</string>
+    <string name="notification_mentions_in">הוזכרת ב-%1$s</string>
+    <string name="notification_mentions_in_more">הוזכרת ב-%1$s (+%2$d נוספים)</string>
+    <string name="notification_mentions_in_plural">%1$d אזכורים ב-%2$s</string>
+    <string name="notification_new_activity_in">פעילות חדשה ב-%1$s</string>
+    <string name="notification_messages_in">הודעות ב-%1$s</string>
+    <string name="notification_joined_conversation">%1$s הצטרף לשיחה</string>
+    <string name="notification_geohash_summary_title_mentions">bitchat - %1$d אזכורים</string>
+    <string name="notification_geohash_summary_title">bitchat - שיחות מיקום</string>
+    <string name="notification_geohash_summary_text">%1$d הודעות מ-%2$d מיקומים</string>
+    <string name="notification_mesh_mention_title_singular">הוזכרת בשיחת Mesh</string>
+    <string name="notification_mesh_mention_title_plural">%1$d אזכורים בשיחת Mesh</string>
+    <string name="notification_more_locations">ו-%1$d מיקומים נוספים</string>
+    <string name="notification_and_more">ו-%1$d נוספים</string>
 
+    <!-- נגישות מועדפים -->
+    <string name="cd_add_favorite">הוסף למועדפים</string>
+    <string name="cd_remove_favorite">הסר ממועדפים</string>
+    <string name="cd_add_bookmark">הוסף סימנייה</string>
+
+    <!-- כותרת הצ\'אט ונגישות -->
+    <string name="chat_back">חזור</string>
+    <string name="chat_channel_prefix">ערוץ: %1$s</string>
+    <string name="chat_leave">עזוב</string>
+    <string name="cd_nostr_reachable">נגיש דרך Nostr</string>
+    <string name="cd_unread_private_messages">הודעות פרטיות שלא נקראו</string>
+    <string name="cd_toggle_bookmark">החלף סימנייה</string>
+    <string name="cd_location_notes">הערות מיקום</string>
+    <string name="cd_teleported">מונה</string>
+    <string name="cd_tor_status">סטטוס Tor</string>
+    <string name="cd_connected_peers">עמיתים מחוברים</string>
+    <string name="cd_geohash_participants">משתתפי geohash</string>
+    <string name="cd_ready_for_handshake">מוכן לחיצת יד</string>
+    <string name="cd_handshake_in_progress">חיצת יד בתהליך</string>
+    <string name="cd_encrypted">מוצפן end-to-end</string>
+    <string name="cd_handshake_failed">חיצת יד נכשלה</string>
+
+    <!-- דיאלוג מציג קבצים -->
+    <string name="file_viewer_title">📎 קובץ התקבל</string>
+    <string name="file_viewer_name">📄 %1$s</string>
+    <string name="file_viewer_size">📏 גודל: %1$s</string>
+    <string name="file_viewer_type">🏷️ סוג: %1$s</string>
+    <string name="file_viewer_open_save">📂 פתיחה / שמירה</string>
+    <string name="close_with_emoji">❌ סגור</string>
+    <string name="pick_image">בחר תמונה</string>
+    <string name="cd_save_current_image">שמור את התמונה הנוכחית</string>
+    <string name="cd_close">סגור</string>
+    <string name="toast_image_saved">תמונה נשמרה לתיקיית ההורדות</string>
+    <string name="toast_failed_to_save_image">שמירת התמונה נכשלה</string>
+    <string name="cd_image_index_of">תמונה %1$d מתוך %2$d</string>
+    <string name="cd_pick_file">בחר קובץ</string>
+
+    <!-- גיליון אודות -->
+    <string name="about_tagline">הודעות mesh מבוזרות עם הצפנה end-to-end</string>
+    <string name="about_offline_mesh_title">צ\'אט Mesh לא מקוון</string>
+    <string name="about_offline_mesh_desc">תקשר ישירות דרך Bluetooth LE ללא אינטרנט או שרתים. הודעות מועברות דרך מכשירים קרובים כדי להרחיב טווח.</string>
+    <string name="about_online_geohash_title">ערוצי Geohash מקוונים</string>
+    <string name="about_online_geohash_desc">התחבר עם אנשים באזורך באמצעות ערוצים מבוססי geohash. הרחב את הרשת באמצעות ממסרי אינטרנט ציבוריים.</string>
+    <string name="about_e2e_title">הצפנה End-to-End</string>
+    <string name="about_e2e_desc">הודעות פרטיות מוצפנות. הודעות הערוץ הן ציבוריות.</string>
+    <string name="about_appearance">מראה</string>
+    <string name="about_system">מערכת</string>
+    <string name="about_light">בהיר</string>
+    <string name="about_dark">כהה</string>
+    <string name="about_pow">proof of work</string>
+    <string name="about_pow_off">pow כבוי</string>
+    <string name="about_pow_on">pow פעיל</string>
+    <string name="about_pow_tip">הוסף proof of work להודעות geohash להרתעת דואר זבל.</string>
+    <string name="about_pow_difficulty">קושי: %1$d ביט (~%2$s)</string>
+    <string name="about_pow_difficulty_attempts">קושי %1$d דורש ~%2$s ניסיונות hash</string>
+    <string name="about_pow_desc_none">לא נדרש proof of work</string>
+    <string name="about_pow_desc_very_low">נמוך מאוד - הגנה מינימלית מדואר זבל</string>
+    <string name="about_pow_desc_low">נמוך - הגנה בסיסית מדואר זבל</string>
+    <string name="about_pow_desc_medium">בינוני - הגנה טובה מדואר זבל</string>
+    <string name="about_pow_desc_high">גבוה - הגנה חזקה מדואר זבל</string>
+    <string name="about_pow_desc_very_high">גבוה מאוד - עלול לגרום לעיכובים</string>
+    <string name="about_pow_desc_extreme">קיצוני - דורש חישוב משמעותי</string>
+    <string name="about_network">רשת</string>
+    <string name="about_tor_off">tor כבוי</string>
+    <string name="about_tor_on">tor פעיל</string>
+    <string name="about_tor_route">נתב אינטרנט דרך tor לפרטיות משופרת.</string>
+    <string name="about_tor_status">סטטוס Tor: %1$s, bootstrap %2$d%%</string>
+    <string name="about_last">אחרון: %1$s</string>
+    <string name="about_emergency_title">מחיקת נתונים חירום</string>
+    <string name="about_emergency_tip">טיפ: לחץ שלוש פעמים על כותרת האפליקציה למחיקת חירום של כל הנתונים השמורים כולל הודעות, מפתחות והגדרות.</string>
+    <string name="about_debug_settings">הגדרות דיבוג</string>
+    <string name="about_footer">קוד פתוח • פרטיות קודמת • מבוזר</string>
+    <string name="profile_picture">תמונת פרופיל</string>
+    <string name="tap_to_change_picture">הקש כדי לשנות תמונת פרופיל</string>
+    <string name="close_plain">סגור</string>
+    <string name="cd_privacy_protected">פרטיות מוגנת</string>
+    <string name="cancel_lower">ביטול</string>
+
+    <!-- תיאורי תוכן כלליים -->
+    <string name="cd_warning">אזהרה</string>
+    <string name="cd_location_services">שירותי מיקום</string>
+    <string name="cd_privacy">פרטיות</string>
+    <string name="cd_error">שגיאה</string>
+    <string name="cd_battery_optimization">אופטימיזציה של הסוללה</string>
+    <string name="cd_benefits">יתרונות</string>
+    <string name="cd_checking_battery_optimization">בודק אופטימיזציה של הסוללה</string>
+    <string name="cd_not_supported_battery_optimization">אופטימיזציה של הסוללה אינה נתמכת</string>
+    <string name="cd_bluetooth">Bluetooth</string>
+    <string name="cd_unread_message">הודעה שלא נקראה</string>
+    <string name="cd_open_map">פתח מפה</string>
+    <string name="cd_remove_bookmark">הסר סימנייה</string>
+    <string name="cd_teleport">העברה</string>
+    <string name="cd_selected">נבחר</string>
+    <string name="cd_leave_channel">עזוב ערוץ</string>
+    <string name="cd_reachable_via_nostr">נגיש דרך Nostr</string>
+    <string name="cd_offline_favorite">מועדף לא מקוון</string>
+    <string name="cd_decrease_precision">הקטן דיוק</string>
+    <string name="cd_increase_precision">הגדל דיוק</string>
+    <string name="cd_select_geohash">בחר geohash</string>
+    <string name="cd_scroll_to_bottom">גלול לתחתית</string>
+    <string name="cd_file">קובץ</string>
+    <string name="cd_image">תמונה</string>
+    <string name="cd_cancel">ביטול</string>
+    <string name="cd_link">קישור</string>
+    <string name="cd_record_voice">הקלט הודעת קול</string>
+    <string name="cd_pick_media">בחר מדיה</string>
+    <string name="cd_mining_pow">כורים PoW</string>
+    <string name="cd_pow_enabled">PoW פעיל</string>
+    <string name="cd_proof_of_work">Proof of Work</string>
+    <string name="pow_mining_ellipsis">כורים…</string>
+    <string name="pow_label_format">pow: %1$dbit</string>
+    <string name="cd_offline_mesh_chat">צ\'אט Mesh לא מקוון</string>
+    <string name="cd_online_geohash_channels">ערוצי Geohash מקוונים</string>
+    <string name="cd_end_to_end_encryption">הצפנה End-to-End</string>
+    <string name="location_bluetooth_subtitle">#bluetooth • %1$s</string>
+
+    <string name="image_page_of">תמונה %1$d מתוך %2$d</string>
+    <string name="image_unavailable">תמונה לא זמינה</string>
+    <string name="image_saved_to_downloads">תמונה נשמרה לתיקיית ההורדות</string>
+    <string name="image_save_failed">שמירת התמונה נכשלה</string>
+    <string name="pick_file">בחר קובץ</string>
+    <string name="file_unavailable">[קובץ לא זמין]</string>
+    <string name="unknown">לא ידוע</string>
+
+    <!-- פעולות גיליון משתמש צ\'אט -->
+    <string name="choose_action_message_or_user">בחר פעולה עבור הודעה זו או משתמש זה</string>
+    <string name="choose_action_user">בחר פעולה עבור משתמש זה</string>
+    <string name="action_copy_message_title">העתק הודעה</string>
+    <string name="action_copy_message_subtitle">העתק הודעה זו ללוח</string>
+    <string name="action_slap_title">תן סטירה ל-%1$s</string>
+    <string name="action_slap_subtitle">שלח הודעת סטירה משחקית</string>
+    <string name="action_hug_title">חבק את %1$s</string>
+    <string name="action_hug_subtitle">שלח הודעת חיבוק ידידותית</string>
+    <string name="action_block_title">חסום את %1$s</string>
+    <string name="action_block_subtitle">חסום את כל ההודעות מהמשתמש הזה</string>
+
+    <!-- גיליון ערוצי מיקום -->
+    <string name="location_channels_title">#ערוצי מיקום</string>
+    <string name="location_channels_desc">תן לצ\'אט עם אנשים לידך באמצעות ערוצי geohash. רק geohash גס משותף, לעולם לא GPS מדויק. אין לצלם מסך או לשתף את המסך הזה כדי להגן על הפרטיות שלך.</string>
+    <string name="grant_location_permission">הענק הרשאת מיקום</string>
+    <string name="location_permission_denied">הרשאת מיקום נדחתה. הפעל בהגדרות כדי להשתמש בערוצי מיקום.</string>
+
+    <string name="location_permission_granted">✓ הרשאת מיקום הוענקה</string>
+    <string name="checking_permissions">בודק הרשאות…</string>
+    <string name="finding_nearby_channels">מוצא ערוצים קרובים…</string>
+    <string name="bookmarked">מסומן</string>
+    <string name="geohash_placeholder">geohash</string>
+    <string name="invalid_geohash">geohash לא חוקי</string>
+    <string name="teleport">העברה</string>
+    <string name="disable_location_services">השבת שירותי מיקום</string>
+    <string name="enable_location_services">הפעל שירותי מיקום</string>
+    <string name="mesh_label">mesh</string>
+    <string name="location_level_block">בלוק</string>
+    <string name="location_level_neighborhood">שכונה</string>
+    <string name="location_level_city">עיר</string>
+    <string name="location_level_province">מחוז</string>
+    <string name="location_level_region">אזור</string>
+
+    <!-- גיליון הערות מיקום -->
+    <plurals name="location_notes_title">
+        <item quantity="one">#%1$s ± 1 • %2$d הערה</item>
+        <item quantity="other">#%1$s ± 1 • %2$d הערות</item>
+    </plurals>
+    <string name="location_notes_description">הוסף הערות קצרות וקבועות למיקום זה כדי שמבקרים אחרים ימצאו אותן.</string>
+    <string name="location_notes_relays_unavailable">ממסרי מיקום אינם זמינים; ההערות הושלו</string>
+    <string name="location_notes_no_relays_title">אין ממסרי מיקום בקרבת מקום</string>
+    <string name="location_notes_no_relays_desc">ההערות תלויות בממסרי מיקום. בדוק חיבור ונסה שוב.</string>
+    <string name="loading_location_notes">טוען הערות…</string>
+    <string name="location_notes_empty_title">אין עדיין הערות</string>
+    <string name="location_notes_empty_desc">היה הראשון להוסיף הערה למקום זה.</string>
+    <string name="dismiss">סגור</string>
+    <string name="location_notes_input_placeholder">הוסף הערה למקום זה</string>
+
+    <!-- דיבוג / אבחון -->
+    <string name="debug_tools">כלי דיבוג</string>
+    <string name="debug_tools_desc">כלים למפתחים לאבחון ושליטה</string>
+    <string name="debug_verbose_logging">רישום מפורט</string>
+    <string name="debug_verbose_hint">מתעד הצטרפות/יציאת עמיתים, כיוון חיבור, ניתוב חבילות וממסרים</string>
+    <string name="debug_bluetooth_roles">תפקידי bluetooth</string>
+    <string name="debug_gatt_server">שרת GATT</string>
+    <string name="debug_connections_fmt">חיבורים: %1$d / %2$d</string>
+    <string name="debug_max_server">מקס שרת</string>
+    <string name="debug_gatt_client">לקוח GATT</string>
+    <string name="debug_max_client">מקס לקוח</string>
+    <string name="debug_overall_connections_fmt">חיבורים: %1$d / %2$d</string>
+    <string name="debug_max_overall">מקס כולל</string>
+    <string name="debug_packet_relay">ממסר חבילות</string>
+    <string name="debug_since_start_fmt">מאז ההתחלה: %1$d</string>
+    <string name="debug_roles_hint">הפעל/כבה תפקידים וסגור את כל החיבורים כשמשבתים</string>
+    <string name="debug_sync_settings">הגדרות סנכרון</string>
+    <string name="debug_max_packets_per_sync_fmt">מקס חבילות לסנכרון: %1$d</string>
+    <string name="debug_max_gcs_filter_size_fmt">מקס גודל מסנן GCS: %1$d בתים (128–1024)</string>
+    <string name="debug_target_fpr_fmt">FPR יעד: %1$.2f%%</string>
+    <string name="debug_connected_devices">מכשירים מחוברים</string>
+    <string name="debug_our_device_id_fmt">מזהה המכשיר שלנו: %1$s</string>
+    <string name="debug_none">אין</string>
+    <string name="debug_disconnect">נתק</string>
+    <string name="debug_recent_scan_results">תוצאות סריקה אחרונות</string>
+    <string name="debug_connect">התחבר</string>
+    <string name="debug_debug_console">קונסולת דיבוג</string>
+    <string name="debug_clear">נקה</string>
+    <string name="debug_relays_window_fmt">עשר השניות האחרונות: %1$d • דקה: %2$d • רבע שעה: %3$d</string>
+    <string name="debug_derived_p_fmt">P נגזר: %1$s • מקס אלמנטים משוער: %2$s</string>
+    <string name="debug_direct_suffix"> • ישיר</string>
+    <string name="debug_rssi_fmt">RSSI: %1$s</string>
+    <string name="debug_question_mark">?</string>
+    <string name="debug_role_server">כשרת (אנו מארחים)</string>
+    <string name="debug_role_client">כלקוח (אנו מתחברים)</string>
+
+    <!-- מסכי עלייה למטוס -->
+    <string name="location_services_required">שירותי מיקום נדרשים</string>
+    <string name="privacy_first">פרטיות קודמת</string>
+    <string name="location_explanation">bitchat לא עוקב אחר המיקום שלך.\n\nשירותי מיקום נדרשים לסריקת Bluetooth ולפיצ\'ר צ\'אט Geohash.</string>
+    <string name="location_needs_for">bitchat זקוק לשירותי מיקום עבור:</string>
+    <string name="location_needs_bullets">• סריקת מכשירי Bluetooth\n• גילוי משתמשים קרובים ברשת mesh\n• פיצ\'ר צ\'אט Geohash\n• ללא מעקב או איסוף מיקום</string>
+    <string name="open_location_settings">פתח הגדרות מיקום</string>
+    <string name="check_again">בדוק שוב</string>
+    <string name="location_services_unavailable">שירותי מיקום לא זמינים</string>
+    <string name="location_unavailable_explanation">שירותי מיקום אינם זמינים במכשיר זה. זה לא רגיל שכן שירותי מיקום הם סטנדרט במכשירי אנדרואיד.\n\nbitchat זקוק לשירותי מיקום כדי שסריקת Bluetooth תעבוד כראוי (דרישת אנדרואיד). ללא זה, האפליקציה לא יכולה לגלות משתמשים קרובים.</string>
+    <string name="checking_location_services">בודק שירותי מיקום…</string>
+    <string name="bluetooth_required">Bluetooth נדרש</string>
+    <string name="bluetooth_needs_for">bitchat זקוק ל-Bluetooth עבור:</string>
+    <string name="bluetooth_needs_bullets">• גילוי משתמשים קרובים\n• יצירת חיבורי רשת mesh\n• שליחה וקבלת הודעות\n• עבודה ללא אינטרנט או שרתים</string>
+    <string name="enable_bluetooth">הפעל Bluetooth</string>
+    <string name="bluetooth_not_supported">Bluetooth אינו נתמך</string>
+    <string name="bluetooth_unsupported_explanation">מכשיר זה אינו תומך ב-Bluetooth Low Energy (BLE), שנדרש כדי ש-bitchat יפעל.\n\nbitchat זקוק ל-BLE ליצירת רשתות mesh ולתקשורת עם מכשירים קרובים ללא אינטרנט.</string>
+    <string name="checking_bluetooth_status">בודק סטטוס Bluetooth…</string>
+    <string name="battery_optimization_detected_title">זוהתה אופטימיזציה של הסוללה</string>
+    <string name="battery_optimization_enabled_title">אופטימיזציה של הסוללה מופעלת</string>
+    <string name="battery_optimization_explanation_short">bitchat צריך לרוץ ברקע כדי לשמור על חיבורי mesh. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו.</string>
+    <string name="benefits_of_disabling">יתרונות ההשבתה</string>
+    <string name="battery_benefits_short">• מסירת הודעות אמינה\n• שומר על חיבור mesh\n• מונע ניתוק חיבורים</string>
+    <string name="disable_battery_optimization">השבת אופטימיזציה של הסוללה</string>
+    <string name="battery_optimization_disabled_title">אופטימיזציה של הסוללה מושבתת</string>
+    <string name="continue_btn">המשך</string>
+    <string name="initializing_mesh_network">מאתחל רשת mesh</string>
+    <string name="dot">.</string>
+    <string name="setting_up_bluetooth">מגדיר רשת Bluetooth mesh…</string>
+    <string name="should_take_seconds">זה אמור לקחת כמה שניות בלבד</string>
+    <string name="warning_emoji">⚠️</string>
+    <string name="setup_not_complete">ההגדרה לא הושלמה</string>
+    <string name="try_again">נסה שוב</string>
+    <string name="open_settings">פתח הגדרות</string>
+    <string name="privacy_protected">הפרטיות שלך מוגנת</string>
+    <string name="privacy_bullets">• ללא מעקב או איסוף נתונים\n• צ\'אט mesh Bluetooth פועלים במלואם לא מקוון\n• צ\'אט Geohash משתמשים באינטרנט</string>
+    <string name="permissions_header">הרשאות</string>
+    <string name="grant_permissions">הענק הרשאות</string>
+    <string name="location_tracking_warning">bitchat לא עוקב אחר המיקום שלך</string>
+    <string name="at_symbol">@</string>
+    <string name="app_brand">הגדרות</string>
+    <string name="channel_count_prefix"> · ⧉ </string>
+    <string name="geohash_people_header">אנשים</string>
+    <string name="nobody_around">אין אף אחד בסביבה…</string>
+    <string name="you_suffix"> (אתה)</string>
+    <string name="pan_zoom_instruction">גרור והתקרב כדי לבחור geohash</string>
+    <string name="select">בחר</string>
+    <string name="type_a_message_placeholder">הקלד הודעה…</string>
+    <string name="mention_suggestion_at">@%1$s</string>
+    <string name="mention">הזכר</string>
+    <string name="image_counter">%1$d / %2$d</string>
+    <string name="pow_time_estimate">(~%1$s)</string>
+    <string name="at_nickname">@%1$s</string>
+    <string name="version_prefix">v%1$s</string>
+    <string name="hash_symbol">#</string>
+    <string name="underscore">_</string>
+    <string name="progress_bar_brackets">[%1$s] %2$d%%</string>
+    <string name="progress_filled">█</string>
+    <string name="progress_empty">░</string>
+    <string name="image_star">image/*</string>
+    <string name="media_type_image">תמונה</string>
+    <string name="media_type_file">קובץ</string>
+
+    <!-- סמלי סטטוס הודעה -->
+    <string name="status_sending">○</string>
+    <string name="status_pending">○</string>
+    <string name="status_sent">✓</string>
+    <string name="status_delivered">✓✓</string>
+    <string name="status_failed">⚠</string>
+    <string name="status_read">✓</string>
+
+    <!-- עוזרי טקסט התראות -->
+    <string name="notification_sent_image">📷 שלח תמונה</string>
+    <string name="notification_sent_voice">🎤 שלח הודעת קול</string>
+    <string name="notification_sent_file">📎 שלח קובץ</string>
+    <string name="notification_file_pdf">📄</string>
+    <string name="notification_file_zip">🗜️</string>
+    <string name="notification_file_doc">📄</string>
+    <string name="notification_file_xls">📊</string>
+    <string name="notification_file_ppt">📈</string>
+    <string name="notification_file_generic">📎</string>
+
+    <!-- נגישות נגן קול -->
+    <string name="cd_play_voice">נגן</string>
+    <string name="cd_pause_voice">השהה</string>
+
+    <!-- תיאורי הרשאות -->
+    <string name="perm_nearby_devices_desc">נדרש לגילוי משתמשי bitchat דרך Bluetooth</string>
+    <string name="perm_nearby_devices_system">אפשר ל-bitchat להתחבר למכשירים קרובים</string>
+    <string name="perm_location_desc">נדרש מאנדרואיד כדי לגלות משתמשי bitchat קרובים דרך Bluetooth</string>
+    <string name="perm_location_system">bitchat זקוק לזה כדי לסרוק מכשירים קרובים</string>
+    <string name="perm_notifications_desc">קבלת התראות כשיש לך הודעות פרטיות</string>
+    <string name="perm_notifications_system">אפשר ל-bitchat לשלוח לך התראות</string>
+    <string name="perm_battery_desc">השבת אופטימיזציה של הסוללה כדי להבטיח ש-bitchat יפעל בצורה אמינה ברקע וישמור על חיבורי רשת mesh</string>
+    <string name="perm_battery_system">אפשר ל-bitchat לרוץ ללא הגבלות סוללה</string>
+
+    <!-- סוגי הרשאות -->
+    <string name="perm_type_nearby_devices">מכשירים קרובים</string>
+    <string name="perm_type_precise_location">מיקום מדויק</string>
+    <string name="perm_type_microphone">מיקרופון</string>
+    <string name="perm_type_notifications">התראות</string>
+    <string name="perm_type_battery_optimization">אופטימיזציה של הסוללה</string>
+    <string name="perm_type_other">אחר</string>
+
+    <!-- דיאלוג בקשת סיסמה -->
+    <string name="pwd_prompt_title">הכנס סיסמת ערוץ</string>
+    <string name="pwd_prompt_message">ערוץ %1$s מוגן בסיסמה. הכנס את הסיסמה כדי להצטרף.</string>
+    <string name="pwd_label">סיסמה</string>
+    <string name="join">הצטרף</string>
+    <string name="cancel">ביטול</string>
+
+    <!-- ריבוי -->
+    <plurals name="notification_and_more">
+        <item quantity="one">ו-%d נוספים</item>
+        <item quantity="other">ו-%d נוספים</item>
+    </plurals>
+
+    <plurals name="people_count">
+        <item quantity="one">אדם אחד</item>
+        <item quantity="other">%d אנשים</item>
+    </plurals>
+
+</resources>

@@ -1,9 +1,12 @@
 package com.bitchat.android
 
 import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
 import com.bitchat.android.nostr.RelayDirectory
 import com.bitchat.android.ui.theme.ThemePreferenceManager
 import com.bitchat.android.net.TorManager
+import java.util.Locale
 
 /**
  * Main application class for bitchat Android
@@ -12,6 +15,9 @@ class BitchatApplication : Application() {
     
     override fun onCreate() {
         super.onCreate()
+        
+        // Set default locale to Hebrew
+        setDefaultLocale(Locale("he"))
         
         // Initialize Tor first so any early network goes over Tor
         try { TorManager.init(this) } catch (_: Exception) { }
@@ -39,5 +45,34 @@ class BitchatApplication : Application() {
         try { com.bitchat.android.ui.debug.DebugPreferenceManager.init(this) } catch (_: Exception) { }
 
         // TorManager already initialized above
+    }
+    
+    /**
+     * Set the default locale for the application
+     */
+    private fun setDefaultLocale(locale: Locale) {
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.setLocale(locale)
+        
+        // Update resources with the locale configuration
+        val resources = applicationContext.resources
+        val metrics = resources.displayMetrics
+        resources.updateConfiguration(config, metrics)
+    }
+    
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(updateBaseContextLocale(base))
+    }
+    
+    private fun updateBaseContextLocale(context: Context): Context {
+        val locale = Locale("he")
+        Locale.setDefault(locale)
+        
+        val configuration = context.resources.configuration
+        configuration.setLocale(locale)
+        configuration.setLayoutDirection(locale)
+        
+        return context.createConfigurationContext(configuration)
     }
 }

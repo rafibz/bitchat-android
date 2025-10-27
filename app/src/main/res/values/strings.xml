@@ -136,6 +136,8 @@
   <string name="close_plain">Close</string>
   <string name="cd_privacy_protected">Privacy Protected</string>
   <string name="cancel_lower">cancel</string>
+  <string name="profile_picture">Profile Picture</string>
+  <string name="tap_to_change_picture">Tap to change profile picture</string>
 
   <!-- Generic content descriptions -->
   <string name="cd_warning">Warning</string>
@@ -308,7 +310,7 @@
   <string name="grant_permissions">Grant Permissions</string>
   <string name="location_tracking_warning">bitchat does NOT track your location</string>
   <string name="at_symbol">@</string>
-  <string name="app_brand">bitchat/</string>
+  <string name="app_brand">settings</string>
   <string name="channel_count_prefix"> · ⧉ </string>
   <string name="geohash_people_header">PEOPLE</string>
   <string name="nobody_around">nobody around...</string>

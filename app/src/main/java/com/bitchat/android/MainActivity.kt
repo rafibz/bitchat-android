@@ -42,6 +42,11 @@ import com.bitchat.android.ui.theme.BitchatTheme
 import com.bitchat.android.nostr.PoWPreferenceManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import android.content.Context
+import android.content.res.Configuration
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalConfiguration
+import java.util.Locale
 
 class MainActivity : OrientationAwareActivity() {
 
@@ -65,6 +70,10 @@ class MainActivity : OrientationAwareActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Force Hebrew locale immediately
+        forceHebrewLocale()
+        Log.d("MainActivity", "onCreate: Current locale after forcing: ${resources.configuration.locale}")
         
         // Enable edge-to-edge display for modern Android look
         enableEdgeToEdge()
@@ -99,15 +108,25 @@ class MainActivity : OrientationAwareActivity() {
         )
         
         setContent {
-            BitchatTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    containerColor = MaterialTheme.colorScheme.background
-                ) { innerPadding ->
-                    OnboardingFlowScreen(modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                    )
+            // Force Hebrew locale for the entire Compose hierarchy
+            val hebrewLocale = Locale("he")
+            val config = Configuration(resources.configuration).apply {
+                setLocale(hebrewLocale)
+            }
+            Log.d("MainActivity", "Setting Hebrew locale - Current: ${Locale.getDefault()}, Hebrew: $hebrewLocale")
+            CompositionLocalProvider(
+                LocalConfiguration provides config
+            ) {
+                BitchatTheme {
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        containerColor = MaterialTheme.colorScheme.background
+                    ) { innerPadding ->
+                        OnboardingFlowScreen(modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                        )
+                    }
                 }
             }
         }
@@ -634,6 +653,31 @@ class MainActivity : OrientationAwareActivity() {
         if (mainViewModel.onboardingState.value == OnboardingState.COMPLETE) {
             handleNotificationIntent(intent)
         }
+    }
+    
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(updateBaseContextLocale(newBase))
+    }
+    
+    private fun updateBaseContextLocale(context: Context): Context {
+        val locale = Locale("he")
+        Locale.setDefault(locale)
+        Log.d("MainActivity", "attachBaseContext: Setting Hebrew locale - ${locale.displayLanguage}")
+        
+        val configuration = context.resources.configuration
+        configuration.setLocale(locale)
+        configuration.setLayoutDirection(locale)
+        
+        return context.createConfigurationContext(configuration)
+    }
+    
+    private fun forceHebrewLocale() {
+        val locale = Locale("he")
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        Log.d("MainActivity", "forceHebrewLocale: Locale set to ${resources.configuration.locale}")
     }
     
     override fun onResume() {

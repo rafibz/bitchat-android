@@ -1,7 +1,12 @@
 package com.bitchat.android.ui
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -9,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bluetooth
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Security
@@ -44,6 +50,21 @@ fun AboutSheet(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val dataManager = remember { DataManager(context) }
+    var profilePicturePath by remember { mutableStateOf(dataManager.loadProfilePicture()) }
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: android.net.Uri? ->
+        if (uri != null) {
+            val outPath = com.bitchat.android.features.media.ImageUtils.downscaleAndSaveToAppFiles(
+                context, uri, maxDim = 200, quality = 80
+            )
+            if (!outPath.isNullOrBlank()) {
+                dataManager.saveProfilePicture(outPath)
+                profilePicturePath = outPath
+            }
+        }
+    }
     
     // Get version name from package info
     val versionName = remember {
@@ -129,6 +150,61 @@ fun AboutSheet(
                                 fontFamily = FontFamily.Monospace,
                                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
                             )
+                        }
+                    }
+
+                    // Profile Picture Section
+                    item(key = "profile_picture") {
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 24.dp)
+                                .padding(vertical = 8.dp)
+                                .clickable { imagePicker.launch("image/*") },
+                            color = colorScheme.surfaceVariant.copy(alpha = 0.25f),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                // Profile Picture Display
+                                Box {
+                                    ProfilePictureView(
+                                        profilePicturePath = profilePicturePath,
+                                        size = 56.dp,
+                                        modifier = Modifier.size(56.dp)
+                                    )
+                                    // Edit icon overlay
+                                    Icon(
+                                        imageVector = Icons.Filled.Edit,
+                                        contentDescription = "Change Profile Picture",
+                                        modifier = Modifier
+                                            .size(20.dp)
+                                            .align(Alignment.BottomEnd)
+                                            .background(colorScheme.surface, CircleShape)
+                                            .padding(4.dp)
+                                            .border(2.dp, colorScheme.primary, CircleShape),
+                                        tint = colorScheme.primary,
+                                    )
+                                }
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.profile_picture),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium,
+                                        color = MaterialTheme.colorScheme.onBackground
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.tap_to_change_picture),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                                    )
+                                }
+                            }
                         }
                     }
 

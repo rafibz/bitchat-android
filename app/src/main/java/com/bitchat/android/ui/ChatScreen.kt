@@ -137,32 +137,21 @@ fun ChatScreen(viewModel: ChatViewModel) {
                 forceScrollToBottom = forceScrollToBottom,
                 onScrolledUpChanged = { isUp -> isScrolledUp = isUp },
                 onNicknameClick = { fullSenderName ->
-                    // Single click - mention user in text input
-                    val currentText = messageText.text
-                    
+                    // Single click - open private chat with this user
                     // Extract base nickname and hash suffix from full sender name
                     val (baseName, hashSuffix) = splitSuffix(fullSenderName)
                     
-                    // Check if we're in a geohash channel to include hash suffix
-                    val selectedLocationChannel = viewModel.selectedLocationChannel.value
-                    val mentionText = if (selectedLocationChannel is com.bitchat.android.geohash.ChannelID.Location && hashSuffix.isNotEmpty()) {
-                        // In geohash chat - include the hash suffix from the full display name
-                        "@$baseName$hashSuffix"
-                    } else {
-                        // Regular chat - just the base nickname
-                        "@$baseName"
-                    }
+                    // Look up the peer ID by nickname from the mesh service
+                    val peerNicknames = viewModel.meshService.getPeerNicknames()
+                    val peerID = peerNicknames.entries.find { (_, nickname) ->
+                        val (nick, _) = splitSuffix(nickname)
+                        nick == baseName
+                    }?.key
                     
-                    val newText = when {
-                        currentText.isEmpty() -> "$mentionText "
-                        currentText.endsWith(" ") -> "$currentText$mentionText "
-                        else -> "$currentText $mentionText "
+                    if (peerID != null) {
+                        // Start a private chat with this user
+                        viewModel.startPrivateChat(peerID)
                     }
-                    
-                    messageText = TextFieldValue(
-                        text = newText,
-                        selection = TextRange(newText.length)
-                    )
                 },
                 onMessageLongPress = { message ->
                     // Message long press - open user action sheet with message context

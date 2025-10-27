@@ -46,6 +46,20 @@ class DataManager(private val context: Context) {
         prefs.edit().putString("nickname", nickname).apply()
     }
     
+    // MARK: - Profile Picture Management
+    
+    fun saveProfilePicture(profilePicturePath: String) {
+        prefs.edit().putString("profile_picture", profilePicturePath).apply()
+    }
+    
+    fun loadProfilePicture(): String? {
+        return prefs.getString("profile_picture", null)
+    }
+    
+    fun clearProfilePicture() {
+        prefs.edit().remove("profile_picture").apply()
+    }
+    
     // MARK: - Geohash Channel Persistence
     
     fun loadLastGeohashChannel(): String? {
