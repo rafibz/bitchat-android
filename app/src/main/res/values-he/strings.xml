@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">bitchat</string>
+    <string name="app_name">closen</string>
     
     <!-- הצדקות הרשאות -->
     <string name="permission_bluetooth_rationale">הרשאת Bluetooth נדרשת לשיחה peer-to-peer ללא אינטרנט.</string>
@@ -29,12 +29,12 @@
     <string name="battery_optimization_not_required">אופטימיזציה של הסוללה אינה נדרשת</string>
     <string name="battery_optimization_checking">בודק אופטימיזציה של הסוללה</string>
     <string name="battery_optimization_why_disable">למה להשבית אופטימיזציה של הסוללה?</string>
-    <string name="battery_optimization_explanation">bitchat פועל ברקע על מנת לשמור על חיבורי רשת mesh עם מכשירים קרובים. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו, ולהוביל לעיכוב או אובדן הודעות.\n\nהשבתת אופטימיזציה של הסוללה מבטיחה מסירת הודעות peer-to-peer אמינה.</string>
+    <string name="battery_optimization_explanation">closen פועל ברקע על מנת לשמור על חיבורי רשת mesh עם מכשירים קרובים. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו, ולהוביל לעיכוב או אובדן הודעות.\n\nהשבתת אופטימיזציה של הסוללה מבטיחה מסירת הודעות peer-to-peer אמינה.</string>
     <string name="battery_optimization_disable_button">השבת אופטימיזציה של הסוללה</string>
-    <string name="battery_optimization_note">הערה: ניתן לשנות הגדרה זו מאוחר יותר בהגדרות אנדרואיד > אפליקציות > bitchat > סוללה</string>
-    <string name="battery_optimization_not_supported_explanation">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. bitchat יפעל כרגיל.</string>
-    <string name="battery_optimization_not_supported_message">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. bitchat יפעל כרגיל.</string>
-    <string name="battery_optimization_success_message">bitchat יכול לפעול בצורה אמינה ברקע</string>
+    <string name="battery_optimization_note">הערה: ניתן לשנות הגדרה זו מאוחר יותר בהגדרות אנדרואיד > אפליקציות > closen > סוללה</string>
+    <string name="battery_optimization_not_supported_explanation">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. closen יפעל כרגיל.</string>
+    <string name="battery_optimization_not_supported_message">המכשיר שלך לא דורש הגדרות אופטימיזציה של הסוללה. closen יפעל כרגיל.</string>
+    <string name="battery_optimization_success_message">closen יכול לפעול בצורה אמינה ברקע</string>
     <string name="battery_optimization_benefits">• מבטיח מסירת הודעות אמינה\n• שומר על חיבור רשת mesh\n• מאפשר העברת הודעות ברקע\n• מונע ניתוק חיבורים</string>
     <string name="battery_optimization_check_again">בדוק שוב</string>
     <string name="battery_optimization_skip">דלג לעת עתה</string>
@@ -46,7 +46,7 @@
     <string name="notification_summary_more">ו-%1$d נוספים</string>
     <string name="notification_messages_from_people">%1$d הודעות מ-%2$d אנשים</string>
     <string name="notification_more_conversations">ו-%1$d שיחות נוספות</string>
-    <string name="notification_active_peers_title">👥 bitchatters קרובים!</string>
+    <string name="notification_active_peers_title">👥 משתמשי closen קרובים!</string>
     <string name="notification_active_peers_one">אדם אחד בסביבה</string>
     <string name="notification_active_peers_many">%1$d אנשים בסביבה</string>
     <string name="notification_new_messages">הודעות חדשות</string>
@@ -57,8 +57,8 @@
     <string name="notification_new_activity_in">פעילות חדשה ב-%1$s</string>
     <string name="notification_messages_in">הודעות ב-%1$s</string>
     <string name="notification_joined_conversation">%1$s הצטרף לשיחה</string>
-    <string name="notification_geohash_summary_title_mentions">bitchat - %1$d אזכורים</string>
-    <string name="notification_geohash_summary_title">bitchat - שיחות מיקום</string>
+    <string name="notification_geohash_summary_title_mentions">closen - %1$d אזכורים</string>
+    <string name="notification_geohash_summary_title">closen - שיחות מיקום</string>
     <string name="notification_geohash_summary_text">%1$d הודעות מ-%2$d מיקומים</string>
     <string name="notification_mesh_mention_title_singular">הוזכרת בשיחת Mesh</string>
     <string name="notification_mesh_mention_title_plural">%1$d אזכורים בשיחת Mesh</string>
@@ -277,24 +277,24 @@
     <!-- מסכי עלייה למטוס -->
     <string name="location_services_required">שירותי מיקום נדרשים</string>
     <string name="privacy_first">פרטיות קודמת</string>
-    <string name="location_explanation">bitchat לא עוקב אחר המיקום שלך.\n\nשירותי מיקום נדרשים לסריקת Bluetooth ולפיצ\'ר צ\'אט Geohash.</string>
-    <string name="location_needs_for">bitchat זקוק לשירותי מיקום עבור:</string>
+    <string name="location_explanation">closen לא עוקב אחר המיקום שלך.\n\nשירותי מיקום נדרשים לסריקת Bluetooth ולפיצ\'ר צ\'אט Geohash.</string>
+    <string name="location_needs_for">closen זקוק לשירותי מיקום עבור:</string>
     <string name="location_needs_bullets">• סריקת מכשירי Bluetooth\n• גילוי משתמשים קרובים ברשת mesh\n• פיצ\'ר צ\'אט Geohash\n• ללא מעקב או איסוף מיקום</string>
     <string name="open_location_settings">פתח הגדרות מיקום</string>
     <string name="check_again">בדוק שוב</string>
     <string name="location_services_unavailable">שירותי מיקום לא זמינים</string>
-    <string name="location_unavailable_explanation">שירותי מיקום אינם זמינים במכשיר זה. זה לא רגיל שכן שירותי מיקום הם סטנדרט במכשירי אנדרואיד.\n\nbitchat זקוק לשירותי מיקום כדי שסריקת Bluetooth תעבוד כראוי (דרישת אנדרואיד). ללא זה, האפליקציה לא יכולה לגלות משתמשים קרובים.</string>
+    <string name="location_unavailable_explanation">שירותי מיקום אינם זמינים במכשיר זה. זה לא רגיל שכן שירותי מיקום הם סטנדרט במכשירי אנדרואיד.\n\nclosen זקוק לשירותי מיקום כדי שסריקת Bluetooth תעבוד כראוי (דרישת אנדרואיד). ללא זה, האפליקציה לא יכולה לגלות משתמשים קרובים.</string>
     <string name="checking_location_services">בודק שירותי מיקום…</string>
     <string name="bluetooth_required">Bluetooth נדרש</string>
-    <string name="bluetooth_needs_for">bitchat זקוק ל-Bluetooth עבור:</string>
+    <string name="bluetooth_needs_for">closen זקוק ל-Bluetooth עבור:</string>
     <string name="bluetooth_needs_bullets">• גילוי משתמשים קרובים\n• יצירת חיבורי רשת mesh\n• שליחה וקבלת הודעות\n• עבודה ללא אינטרנט או שרתים</string>
     <string name="enable_bluetooth">הפעל Bluetooth</string>
     <string name="bluetooth_not_supported">Bluetooth אינו נתמך</string>
-    <string name="bluetooth_unsupported_explanation">מכשיר זה אינו תומך ב-Bluetooth Low Energy (BLE), שנדרש כדי ש-bitchat יפעל.\n\nbitchat זקוק ל-BLE ליצירת רשתות mesh ולתקשורת עם מכשירים קרובים ללא אינטרנט.</string>
+    <string name="bluetooth_unsupported_explanation">מכשיר זה אינו תומך ב-Bluetooth Low Energy (BLE), שנדרש כדי ש-closen יפעל.\n\nclosen זקוק ל-BLE ליצירת רשתות mesh ולתקשורת עם מכשירים קרובים ללא אינטרנט.</string>
     <string name="checking_bluetooth_status">בודק סטטוס Bluetooth…</string>
     <string name="battery_optimization_detected_title">זוהתה אופטימיזציה של הסוללה</string>
     <string name="battery_optimization_enabled_title">אופטימיזציה של הסוללה מופעלת</string>
-    <string name="battery_optimization_explanation_short">bitchat צריך לרוץ ברקע כדי לשמור על חיבורי mesh. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו.</string>
+    <string name="battery_optimization_explanation_short">closen צריך לרוץ ברקע כדי לשמור על חיבורי mesh. אופטימיזציה של הסוללה עלולה להפריע לחיבורים אלו.</string>
     <string name="benefits_of_disabling">יתרונות ההשבתה</string>
     <string name="battery_benefits_short">• מסירת הודעות אמינה\n• שומר על חיבור mesh\n• מונע ניתוק חיבורים</string>
     <string name="disable_battery_optimization">השבת אופטימיזציה של הסוללה</string>
@@ -312,7 +312,7 @@
     <string name="privacy_bullets">• ללא מעקב או איסוף נתונים\n• צ\'אט mesh Bluetooth פועלים במלואם לא מקוון\n• צ\'אט Geohash משתמשים באינטרנט</string>
     <string name="permissions_header">הרשאות</string>
     <string name="grant_permissions">הענק הרשאות</string>
-    <string name="location_tracking_warning">bitchat לא עוקב אחר המיקום שלך</string>
+    <string name="location_tracking_warning">closen לא עוקב אחר המיקום שלך</string>
     <string name="at_symbol">@</string>
     <string name="app_brand">הגדרות</string>
     <string name="channel_count_prefix"> · ⧉ </string>
@@ -361,14 +361,14 @@
     <string name="cd_pause_voice">השהה</string>
 
     <!-- תיאורי הרשאות -->
-    <string name="perm_nearby_devices_desc">נדרש לגילוי משתמשי bitchat דרך Bluetooth</string>
-    <string name="perm_nearby_devices_system">אפשר ל-bitchat להתחבר למכשירים קרובים</string>
-    <string name="perm_location_desc">נדרש מאנדרואיד כדי לגלות משתמשי bitchat קרובים דרך Bluetooth</string>
-    <string name="perm_location_system">bitchat זקוק לזה כדי לסרוק מכשירים קרובים</string>
+    <string name="perm_nearby_devices_desc">נדרש לגילוי משתמשי closen דרך Bluetooth</string>
+    <string name="perm_nearby_devices_system">אפשר ל-closen להתחבר למכשירים קרובים</string>
+    <string name="perm_location_desc">נדרש מאנדרואיד כדי לגלות משתמשי closen קרובים דרך Bluetooth</string>
+    <string name="perm_location_system">closen זקוק לזה כדי לסרוק מכשירים קרובים</string>
     <string name="perm_notifications_desc">קבלת התראות כשיש לך הודעות פרטיות</string>
-    <string name="perm_notifications_system">אפשר ל-bitchat לשלוח לך התראות</string>
-    <string name="perm_battery_desc">השבת אופטימיזציה של הסוללה כדי להבטיח ש-bitchat יפעל בצורה אמינה ברקע וישמור על חיבורי רשת mesh</string>
-    <string name="perm_battery_system">אפשר ל-bitchat לרוץ ללא הגבלות סוללה</string>
+    <string name="perm_notifications_system">אפשר ל-closen לשלוח לך התראות</string>
+    <string name="perm_battery_desc">השבת אופטימיזציה של הסוללה כדי להבטיח ש-closen יפעל בצורה אמינה ברקע וישמור על חיבורי רשת mesh</string>
+    <string name="perm_battery_system">אפשר ל-closen לרוץ ללא הגבלות סוללה</string>
 
     <!-- סוגי הרשאות -->
     <string name="perm_type_nearby_devices">מכשירים קרובים</string>

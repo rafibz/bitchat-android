@@ -149,6 +149,18 @@ fun MessageItem(
 ) {
     val colorScheme = MaterialTheme.colorScheme
     val timeFormatter = remember { SimpleDateFormat("HH:mm:ss", Locale.getDefault()) }
+    val context = LocalContext.current
+    val dataManager = remember { DataManager(context) }
+    
+    // Determine if this is the current user's message
+    val isSelf = message.senderPeerID == meshService.myPeerID || 
+                 message.sender == currentUserNickname ||
+                 message.sender.startsWith("$currentUserNickname#")
+    
+    // Get profile picture path for current user
+    val profilePicturePath = remember { 
+        if (isSelf) dataManager.loadProfilePicture() else null 
+    }
     
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -160,6 +172,15 @@ fun MessageItem(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.Top
             ) {
+                // Profile picture on the left
+                ProfilePictureView(
+                    profilePicturePath = profilePicturePath,
+                    size = 32.dp,
+                    modifier = Modifier.padding(top = 2.dp),
+                    showBorder = false
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                
                 // Provide a small end padding for own private messages so overlay doesn't cover text
                 val endPad = if (message.isPrivate && message.sender == currentUserNickname) 16.dp else 0.dp
                 // Create a custom layout that combines selectable text with clickable nickname areas
@@ -213,37 +234,78 @@ fun MessageItem(
         onImageClick: ((String, List<String>, Int) -> Unit)?,
         modifier: Modifier = Modifier
     ) {
+    val context = LocalContext.current
+    val dataManager = remember { DataManager(context) }
+    
+    // Determine if this is the current user's message
+    val isSelf = message.senderPeerID == meshService.myPeerID || 
+                 message.sender == currentUserNickname ||
+                 message.sender.startsWith("$currentUserNickname#")
+    
+    // Get profile picture path for current user
+    val profilePicturePath = remember { 
+        if (isSelf) dataManager.loadProfilePicture() else null 
+    }
+    
     // Image special rendering
     if (message.type == BitchatMessageType.Image) {
-        com.bitchat.android.ui.media.ImageMessageItem(
-            message = message,
-            messages = messages,
-            currentUserNickname = currentUserNickname,
-            meshService = meshService,
-            colorScheme = colorScheme,
-            timeFormatter = timeFormatter,
-            onNicknameClick = onNicknameClick,
-            onMessageLongPress = onMessageLongPress,
-            onCancelTransfer = onCancelTransfer,
-            onImageClick = onImageClick,
-            modifier = modifier
-        )
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Top
+        ) {
+            // Profile picture on the left
+            ProfilePictureView(
+                profilePicturePath = profilePicturePath,
+                size = 32.dp,
+                modifier = Modifier.padding(top = 2.dp),
+                showBorder = false
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            com.bitchat.android.ui.media.ImageMessageItem(
+                message = message,
+                messages = messages,
+                currentUserNickname = currentUserNickname,
+                meshService = meshService,
+                colorScheme = colorScheme,
+                timeFormatter = timeFormatter,
+                onNicknameClick = onNicknameClick,
+                onMessageLongPress = onMessageLongPress,
+                onCancelTransfer = onCancelTransfer,
+                onImageClick = onImageClick,
+                modifier = Modifier.weight(1f)
+            )
+        }
         return
     }
 
     // Voice note special rendering
     if (message.type == BitchatMessageType.Audio) {
-        com.bitchat.android.ui.media.AudioMessageItem(
-            message = message,
-            currentUserNickname = currentUserNickname,
-            meshService = meshService,
-            colorScheme = colorScheme,
-            timeFormatter = timeFormatter,
-            onNicknameClick = onNicknameClick,
-            onMessageLongPress = onMessageLongPress,
-            onCancelTransfer = onCancelTransfer,
-            modifier = modifier
-        )
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Top
+        ) {
+            // Profile picture on the left
+            ProfilePictureView(
+                profilePicturePath = profilePicturePath,
+                size = 32.dp,
+                modifier = Modifier.padding(top = 2.dp),
+                showBorder = false
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            com.bitchat.android.ui.media.AudioMessageItem(
+                message = message,
+                currentUserNickname = currentUserNickname,
+                meshService = meshService,
+                colorScheme = colorScheme,
+                timeFormatter = timeFormatter,
+                onNicknameClick = onNicknameClick,
+                onMessageLongPress = onMessageLongPress,
+                onCancelTransfer = onCancelTransfer,
+                modifier = Modifier.weight(1f)
+            )
+        }
         return
     }
 
@@ -259,7 +321,20 @@ fun MessageItem(
             }
             else -> null to null
         }
-        Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Top
+        ) {
+            // Profile picture on the left
+            ProfilePictureView(
+                profilePicturePath = profilePicturePath,
+                size = 32.dp,
+                modifier = Modifier.padding(top = 2.dp),
+                showBorder = false
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column(modifier = Modifier.weight(1f)) {
             // Header: nickname + timestamp line above the file, identical styling to text messages
             val headerText = formatMessageHeaderAnnotatedString(
                 message = message,
@@ -344,6 +419,7 @@ fun MessageItem(
                         Text(text = stringResource(R.string.file_unavailable), fontFamily = FontFamily.Monospace, color = Color.Gray)
                     }
                 }
+            }
             }
         }
         return
